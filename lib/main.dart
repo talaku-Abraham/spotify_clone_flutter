@@ -53,7 +53,7 @@ class Shell extends StatelessWidget {
             ),
           ),
           Container(
-            color: Theme.of(context).primaryColor,
+            color: Theme.of(context).colorScheme.secondary,
             height: 84,
             width: double.infinity,
             child: const Text('talexx'),

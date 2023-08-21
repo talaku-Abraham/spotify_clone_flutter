@@ -55,7 +55,7 @@ class _LibraryPlayistState extends State<_LibraryPlayist> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Your Library',
+                'YOUR LIBRARY',
                 style: Theme.of(context).textTheme.headlineMedium,
                 overflow: TextOverflow.ellipsis,
               ),
