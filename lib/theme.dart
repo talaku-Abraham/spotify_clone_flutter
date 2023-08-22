@@ -4,12 +4,12 @@ class MyAppTheme {
   static ThemeData darkTheme = ThemeData(
     iconTheme: const IconThemeData().copyWith(color: Colors.white),
     appBarTheme: const AppBarTheme(backgroundColor: Colors.black),
-    scaffoldBackgroundColor: Colors.amber,
+    scaffoldBackgroundColor: Colors.black,
     // const Color(0xFF121212),
     fontFamily: 'Montserrat',
     colorScheme: const ColorScheme.dark(
         primary: Colors.black,
-        background: Colors.red,
+        background: Colors.black,
         secondary: Color(0xFF1DB954)),
     textTheme: TextTheme(
       //headline2

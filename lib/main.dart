@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:desktop_window/desktop_window.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:spotify_clone/presentation/screens/playlist_screen.dart';
 import 'package:spotify_clone/theme.dart';
 
 import 'widget/widgets.dart';
@@ -14,7 +16,7 @@ void main() {
     DesktopWindow.setMinWindowSize(const Size(600, 800));
   }
 
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -40,10 +42,11 @@ class Shell extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          const Expanded(
+          Expanded(
             child: Row(
               children: [
-                SideMenu(),
+                if (MediaQuery.of(context).size.width > 800) const SideMenu(),
+                const PlayListScreen(),
                 // Expanded(
                 //   child: Container(
                 //     color: Colors.black,
@@ -52,12 +55,7 @@ class Shell extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            color: Theme.of(context).colorScheme.secondary,
-            height: 84,
-            width: double.infinity,
-            child: const Text('talexx'),
-          )
+          const CurrentTrack()
         ],
       ),
     );

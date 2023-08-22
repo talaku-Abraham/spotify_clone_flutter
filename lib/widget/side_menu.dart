@@ -14,7 +14,11 @@ class SideMenu extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Image.asset('assets/SpotifyLogo.png', height: 55.0),
+            child: Image.asset(
+              'assets/SpotifyLogo.png',
+              height: 55.0,
+              filterQuality: FilterQuality.high,
+            ),
           ),
           const _SideMenuIconTab(
             icon: Icons.home,
@@ -44,54 +48,83 @@ class _LibraryPlayist extends StatefulWidget {
 }
 
 class _LibraryPlayistState extends State<_LibraryPlayist> {
+  ScrollController? _scrollController;
+  @override
+  void initState() {
+    _scrollController = ScrollController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollController?.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: ListView(
-        padding: const EdgeInsets.symmetric(vertical: 12),
-        physics: const ClampingScrollPhysics(),
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'YOUR LIBRARY',
-                style: Theme.of(context).textTheme.headlineMedium,
-                overflow: TextOverflow.ellipsis,
-              ),
-              ...yourLibrary
-                  .map((e) => ListTile(
-                        dense: true,
-                        title: Text(
-                          e,
-                          style: Theme.of(context).textTheme.bodyMedium,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ))
-                  .toList()
-            ],
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'PLAYLIST',
-                style: Theme.of(context).textTheme.headlineMedium,
-                overflow: TextOverflow.ellipsis,
-              ),
-              ...playlist
-                  .map((e) => ListTile(
-                        dense: true,
-                        title: Text(
-                          e,
-                          style: Theme.of(context).textTheme.bodyMedium,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ))
-                  .toList()
-            ],
-          )
-        ],
+      child: Scrollbar(
+        controller: _scrollController,
+        thumbVisibility: true,
+        child: ListView(
+          controller: _scrollController,
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          physics: const ClampingScrollPhysics(),
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  child: Text(
+                    'YOUR LIBRARY',
+                    style: Theme.of(context).textTheme.headlineMedium,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                ...yourLibrary
+                    .map((e) => ListTile(
+                          dense: true,
+                          title: Text(
+                            e,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ))
+                    .toList()
+              ],
+            ),
+            const SizedBox(
+              height: 24.0,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: Text(
+                    'PLAYLISTS',
+                    style: Theme.of(context).textTheme.headlineMedium,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                ...playlist
+                    .map((e) => ListTile(
+                          dense: true,
+                          title: Text(
+                            e,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ))
+                    .toList()
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
