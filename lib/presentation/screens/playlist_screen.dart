@@ -87,9 +87,6 @@ class _PlayListScreenState extends State<PlayListScreen> {
           const SizedBox(
             width: 8,
           ),
-          const SizedBox(
-            width: 8,
-          ),
           IconButton(
             padding: const EdgeInsets.only(),
             onPressed: () {},

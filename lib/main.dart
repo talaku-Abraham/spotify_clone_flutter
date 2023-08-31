@@ -24,10 +24,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = MyAppTheme.darkTheme;
     return MaterialApp(
       title: 'Flutter Spotify UI',
       debugShowCheckedModeBanner: false,
-      theme: MyAppTheme.darkTheme,
+      theme: theme,
       // darkTheme: ,
       home: const Shell(),
     );
@@ -47,11 +48,6 @@ class Shell extends StatelessWidget {
               children: [
                 if (MediaQuery.of(context).size.width > 800) const SideMenu(),
                 const PlayListScreen(),
-                // Expanded(
-                //   child: Container(
-                //     color: Colors.black,
-                //   ),
-                // ),
               ],
             ),
           ),
